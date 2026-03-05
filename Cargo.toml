@@ -9,9 +9,9 @@ name = "nest"
 path = "src/main.rs"
 
 [dependencies]
-nest-crdt = { path = "../nest-crdt" }
-nest-core = { path = "../nest-core" }
-nest-protocol = { path = "../nest-protocol" }
+nest-crdt = { git = "https://github.com/soukadao/nest-crdt", branch = "main" }
+nest-core = { git = "https://github.com/soukadao/nest-core", branch = "main" }
+nest-protocol = { git = "https://github.com/soukadao/nest-protocol", branch = "main" }
 clap = { version = "4", features = ["derive"] }
 anyhow = "1"
 tokio = { version = "1", features = ["full"] }
