@@ -127,6 +127,16 @@ enum ReviewAction {
     },
     /// List reviews
     List,
+    /// Show review details
+    Show { id: String },
+    /// Approve a review
+    Approve { id: String },
+    /// Close a review
+    Close { id: String },
+    /// Add a comment to a review
+    Comment { id: String, body: String },
+    /// Merge a review
+    Merge { id: String },
 }
 
 #[derive(Subcommand)]
@@ -236,6 +246,13 @@ async fn main() -> Result<()> {
                     target,
                 } => cmd::review::create(&mut repo, &title, &source, &target)?,
                 ReviewAction::List => cmd::review::list(&repo)?,
+                ReviewAction::Show { id } => cmd::review::show(&repo, &id)?,
+                ReviewAction::Approve { id } => cmd::review::approve(&mut repo, &id)?,
+                ReviewAction::Close { id } => cmd::review::close(&mut repo, &id)?,
+                ReviewAction::Comment { id, body } => {
+                    cmd::review::comment(&mut repo, &id, &body)?;
+                }
+                ReviewAction::Merge { id } => cmd::review::merge(&mut repo, &id)?,
             }
         }
         Commands::Doc { action } => {
